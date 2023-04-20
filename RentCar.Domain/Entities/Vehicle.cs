@@ -1,7 +1,5 @@
-﻿
-using Microsoft.VisualBasic.FileIO;
-using RentCar.Domain.Common;
-using System.Xml.Linq;
+﻿using RentCar.Domain.Common;
+
 
 namespace RentCar.Domain.Entities;
 public class Vehicle : BaseEntity

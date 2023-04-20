@@ -1,11 +1,12 @@
-﻿using RentCar.Application.Interfaces.Services.Responses;
+﻿using RentCar.Domain.Common.Query;
+using RentCar.Domain.Common.Responses;
 using RentCar.Domain.Entities;
 
 namespace RentCar.Application.Interfaces.Services;
 public interface IVehicleModelService
 {
-    Task<IEnumerable<VehicleModel>> ListAsync();
-    Task<ManufacturerResponse> AddAsync(VehicleModel vehicleModel);
-    Task<ManufacturerResponse> UpdateAsync(int id, VehicleModel vehicleModel);
-    Task<ManufacturerResponse> DeleteAsync(int id);
+    Task<QueryResult<VehicleModel>> ListAsync(VehicleModelQuery query);
+    Task<VehicleModelResponse> AddAsync(VehicleModel vehicleModel);
+    Task<VehicleModelResponse> UpdateAsync(int id, VehicleModel vehicleModel);
+    Task<VehicleModelResponse> DeleteAsync(int id);
 }

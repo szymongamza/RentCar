@@ -2,7 +2,7 @@
 
 using RentCar.Domain.Entities;
 
-namespace RentCar.Application.Interfaces.Services.Responses;
+namespace RentCar.Domain.Common.Responses;
 public class VehicleModelResponse : BaseResponse<VehicleModel>
 {
     /// <summary>

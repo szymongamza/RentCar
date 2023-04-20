@@ -1,11 +1,10 @@
 ﻿
 using RentCar.Domain.Common;
 
-namespace RentCar.Domain.Entities
+namespace RentCar.Domain.Entities;
+
+public class Manufacturer : BaseEntity
 {
-    public class Manufacturer : BaseEntity
-    {
-        public string ManufacturerName { get; set; }
-        public ICollection<VehicleModel> VehicleModels { get; set; }
-    }
+    public string ManufacturerName { get; set; }
+    public ICollection<VehicleModel> VehicleModels { get; set; }
 }

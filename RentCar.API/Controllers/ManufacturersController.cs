@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using RentCar.Application.DTOs;
+using RentCar.API.Resources;
+using RentCar.API.Resources.Manufacturer;
 using RentCar.Application.Interfaces.Services;
-using RentCar.Application.Responses;
 using RentCar.Domain.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,11 +25,11 @@ public class ManufacturersController : ControllerBase
     /// </summary>
     /// <returns>List os categories.</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<ReadManufacturer>), 200)]
-    public async Task<IEnumerable<ReadManufacturer>> ListAsync()
+    [ProducesResponseType(typeof(IEnumerable<ManufacturerResource>), 200)]
+    public async Task<IEnumerable<ManufacturerResource>> ListAsync()
     {
         var manufacturers = await _manufacturerService.ListAsync();
-        var resources = _mapper.Map<IEnumerable<Manufacturer>, IEnumerable<ReadManufacturer>>(manufacturers);
+        var resources = _mapper.Map<IEnumerable<Manufacturer>, IEnumerable<ManufacturerResource>>(manufacturers);
 
         return resources;
     }
@@ -40,19 +40,19 @@ public class ManufacturersController : ControllerBase
     /// <param name="resource">Manufacturer data.</param>
     /// <returns>Response for the request.</returns>
     [HttpPost]
-    [ProducesResponseType(typeof(ReadManufacturer), 201)]
-    [ProducesResponseType(typeof(ErrorResponse), 400)]
-    public async Task<IActionResult> PostAsync([FromBody] CreateManufacturer resource)
+    [ProducesResponseType(typeof(ManufacturerResource), 201)]
+    [ProducesResponseType(typeof(ErrorResource), 400)]
+    public async Task<IActionResult> PostAsync([FromBody] SaveManufacturerResource resource)
     {
-        var manufacturer = _mapper.Map<CreateManufacturer, Manufacturer>(resource);
+        var manufacturer = _mapper.Map<SaveManufacturerResource, Manufacturer>(resource);
         var result = await _manufacturerService.AddAsync(manufacturer);
 
         if (!result.Success)
         {
-            return BadRequest(new ErrorResponse(result.Message));
+            return BadRequest(new ErrorResource(result.Message));
         }
 
-        var manufacturerResource = _mapper.Map<Manufacturer, ReadManufacturer>(result.Resource);
+        var manufacturerResource = _mapper.Map<Manufacturer, ManufacturerResource>(result.Resource);
         return Ok(manufacturerResource);
     }
 
@@ -63,19 +63,19 @@ public class ManufacturersController : ControllerBase
     /// <param name="resource">Updated manufacturer data.</param>
     /// <returns>Response for the request.</returns>
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(ReadManufacturer), 200)]
-    [ProducesResponseType(typeof(ErrorResponse), 400)]
-    public async Task<IActionResult> PutAsync(int id, [FromBody] CreateManufacturer resource)
+    [ProducesResponseType(typeof(ManufacturerResource), 200)]
+    [ProducesResponseType(typeof(ErrorResource), 400)]
+    public async Task<IActionResult> PutAsync(int id, [FromBody] SaveManufacturerResource resource)
     {
-        var manufacturer = _mapper.Map<CreateManufacturer, Manufacturer>(resource);
+        var manufacturer = _mapper.Map<SaveManufacturerResource, Manufacturer>(resource);
         var result = await _manufacturerService.UpdateAsync(id, manufacturer);
 
         if (!result.Success)
         {
-            return BadRequest(new ErrorResponse(result.Message));
+            return BadRequest(new ErrorResource(result.Message));
         }
 
-        var categoryResource = _mapper.Map<Manufacturer, ReadManufacturer>(result.Resource);
+        var categoryResource = _mapper.Map<Manufacturer, ManufacturerResource>(result.Resource);
         return Ok(categoryResource);
     }
 
@@ -85,18 +85,18 @@ public class ManufacturersController : ControllerBase
     /// <param name="id">Manufacturer identifier.</param>
     /// <returns>Response for the request.</returns>
     [HttpDelete("{id}")]
-    [ProducesResponseType(typeof(ReadManufacturer), 200)]
-    [ProducesResponseType(typeof(ErrorResponse), 400)]
+    [ProducesResponseType(typeof(ManufacturerResource), 200)]
+    [ProducesResponseType(typeof(ErrorResource), 400)]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         var result = await _manufacturerService.DeleteAsync(id);
 
         if (!result.Success)
         {
-            return BadRequest(new ErrorResponse(result.Message));
+            return BadRequest(new ErrorResource(result.Message));
         }
 
-        var categoryResource = _mapper.Map<Manufacturer, ReadManufacturer>(result.Resource);
+        var categoryResource = _mapper.Map<Manufacturer, ManufacturerResource>(result.Resource);
         return Ok(categoryResource);
     }
 }
