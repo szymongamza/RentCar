@@ -12,9 +12,8 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
     {
 
-        services.AddDbContext<RentCarDbContext>(options => 
-            options.UseInMemoryDatabase("RentCarDB")
-        );
+        services.AddDbContext<RentCarDbContext>(options =>
+            options.UseSqlite(configuration.GetConnectionString("RentCarDatabase")));
         services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
         services.AddScoped<IVehicleModelRepository, VehicleModelRepository>();
         services.AddScoped<IVehicleRepository, VehicleRepository>();
