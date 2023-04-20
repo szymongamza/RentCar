@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RentCar.Application.Intefaces.Repositories;
+using RentCar.Application.Interfaces.Repositories;
 using RentCar.Domain.Common;
 using RentCar.Infrastructure.Data;
 

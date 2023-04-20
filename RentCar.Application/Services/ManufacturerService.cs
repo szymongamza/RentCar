@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using RentCar.Application.Intefaces.Repositories;
-using RentCar.Application.Intefaces.Services;
-using RentCar.Application.Intefaces.Services.Responses;
+using RentCar.Application.Interfaces.Repositories;
+using RentCar.Application.Interfaces.Services;
+using RentCar.Application.Interfaces.Services.Responses;
 using RentCar.Domain.Entities;
 using RentCar.Domain.Enums;
 

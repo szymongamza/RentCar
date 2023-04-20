@@ -1,8 +1,7 @@
-﻿
-using RentCar.Application.Intefaces.Services.Responses;
+﻿using RentCar.Application.Interfaces.Services.Responses;
 using RentCar.Domain.Entities;
 
-namespace RentCar.Application.Intefaces.Services
+namespace RentCar.Application.Interfaces.Services
 {
     public interface IManufacturerService
     {

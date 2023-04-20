@@ -1,6 +1,6 @@
 ﻿using RentCar.Domain.Common;
 
-namespace RentCar.Application.Intefaces.Repositories
+namespace RentCar.Application.Interfaces.Repositories
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {

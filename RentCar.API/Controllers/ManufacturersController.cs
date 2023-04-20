@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RentCar.Application.DTOs;
-using RentCar.Application.Intefaces.Services;
+using RentCar.Application.Interfaces.Services;
 using RentCar.Application.Responses;
 using RentCar.Domain.Entities;
 

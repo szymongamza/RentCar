@@ -3,7 +3,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RentCar.Application.Helpers;
-using RentCar.Application.Intefaces.Services;
+using RentCar.Application.Interfaces.Services;
 using RentCar.Application.Services;
 
 namespace RentCar.Application;

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RentCar.Infrastructure.Data;
 using RentCar.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
-using RentCar.Application.Intefaces.Repositories;
+using RentCar.Application.Interfaces.Repositories;
 
 namespace RentCar.Infrastructure;
 public static class DependencyInjection

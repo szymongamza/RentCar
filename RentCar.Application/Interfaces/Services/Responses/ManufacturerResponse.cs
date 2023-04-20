@@ -1,6 +1,6 @@
 ﻿using RentCar.Domain.Entities;
 
-namespace RentCar.Application.Intefaces.Services.Responses
+namespace RentCar.Application.Interfaces.Services.Responses
 {
     public class ManufacturerResponse : BaseResponse<Manufacturer>
     {

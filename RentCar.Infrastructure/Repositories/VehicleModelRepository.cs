@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RentCar.Application.Intefaces.Repositories;
+using RentCar.Application.Interfaces.Repositories;
 using RentCar.Domain.Entities;
 using RentCar.Infrastructure.Data;
 

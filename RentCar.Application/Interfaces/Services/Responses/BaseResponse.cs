@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RentCar.Application.Intefaces.Services.Responses
+﻿namespace RentCar.Application.Interfaces.Services.Responses
 {
     public abstract class BaseResponse<T>
     {
