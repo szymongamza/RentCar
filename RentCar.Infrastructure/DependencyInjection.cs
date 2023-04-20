@@ -1,10 +1,10 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using RentCar.Application.Intefaces;
 using RentCar.Infrastructure.Data;
 using RentCar.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
+using RentCar.Application.Intefaces.Repositories;
 
 namespace RentCar.Infrastructure;
 public static class DependencyInjection

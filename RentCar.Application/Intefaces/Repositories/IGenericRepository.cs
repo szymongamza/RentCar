@@ -1,6 +1,6 @@
 ﻿using RentCar.Domain.Common;
 
-namespace RentCar.Application.Intefaces
+namespace RentCar.Application.Intefaces.Repositories
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {
@@ -8,9 +8,9 @@ namespace RentCar.Application.Intefaces
 
         public Task DeleteAsync(T entity);
 
-        public Task<List<T>?> GetAllAsync();
+        public Task<List<T>> ToListAsync();
 
-        public Task<T?> GetByIdAsync(int id);
+        public Task<T> FindByIdAsync(int id);
 
         public Task UpdateAsync(T entity);
     }

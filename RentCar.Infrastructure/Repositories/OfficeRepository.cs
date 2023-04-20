@@ -1,6 +1,4 @@
-﻿
-
-using RentCar.Application.Intefaces;
+﻿using RentCar.Application.Intefaces.Repositories;
 using RentCar.Domain.Entities;
 using RentCar.Infrastructure.Data;
 

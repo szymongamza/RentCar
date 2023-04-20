@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RentCar.Application.Intefaces;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using RentCar.Application.DTOs;
+using RentCar.Application.Intefaces.Services;
+using RentCar.Application.Responses;
 using RentCar.Domain.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,63 +12,91 @@ namespace RentCar.API.Controllers;
 [ApiController]
 public class ManufacturersController : ControllerBase
 {
-    private readonly IManufacturerRepository _manufacturerRepository;
-    // GET: api/<ManufacturersController>
-    public ManufacturersController(IManufacturerRepository manufacturerRepository)
+    private readonly IMapper _mapper;
+    private readonly IManufacturerService _manufacturerService;
+    public ManufacturersController(IMapper mapper, IManufacturerService manufacturerService)
     {
-        _manufacturerRepository = manufacturerRepository;
+        _mapper = mapper;
+        _manufacturerService = manufacturerService;
     }
 
+    /// <summary>
+    /// Lists all categories.
+    /// </summary>
+    /// <returns>List os categories.</returns>
     [HttpGet]
-    public async Task<IActionResult> Get()
+    [ProducesResponseType(typeof(IEnumerable<ReadManufacturer>), 200)]
+    public async Task<IEnumerable<ReadManufacturer>> ListAsync()
     {
-        return Ok(await _manufacturerRepository.GetAllAsync());
+        var manufacturers = await _manufacturerService.ListAsync();
+        var resources = _mapper.Map<IEnumerable<Manufacturer>, IEnumerable<ReadManufacturer>>(manufacturers);
+
+        return resources;
     }
 
-    // GET api/<ManufacturersController>/5
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)
-    {
-        return Ok(await _manufacturerRepository.GetByIdAsync(id));
-    }
-
-    // POST api/<ManufacturersController>
+    /// <summary>
+    /// Saves a new manufacturer.
+    /// </summary>
+    /// <param name="resource">Manufacturer data.</param>
+    /// <returns>Response for the request.</returns>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Manufacturer manufacturer)
+    [ProducesResponseType(typeof(ReadManufacturer), 201)]
+    [ProducesResponseType(typeof(ErrorResponse), 400)]
+    public async Task<IActionResult> PostAsync([FromBody] CreateManufacturer resource)
     {
-        await _manufacturerRepository.AddAsync(manufacturer);
-        return Ok();
+        var manufacturer = _mapper.Map<CreateManufacturer, Manufacturer>(resource);
+        var result = await _manufacturerService.AddAsync(manufacturer);
+
+        if (!result.Success)
+        {
+            return BadRequest(new ErrorResponse(result.Message));
+        }
+
+        var manufacturerResource = _mapper.Map<Manufacturer, ReadManufacturer>(result.Resource);
+        return Ok(manufacturerResource);
     }
 
-    // PUT api/<ManufacturersController>/5
+    /// <summary>
+    /// Updates an existing manufacturer according to an identifier.
+    /// </summary>
+    /// <param name="id">Manufacturer identifier.</param>
+    /// <param name="resource">Updated manufacturer data.</param>
+    /// <returns>Response for the request.</returns>
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, [FromBody] Manufacturer manufacturer)
+    [ProducesResponseType(typeof(ReadManufacturer), 200)]
+    [ProducesResponseType(typeof(ErrorResponse), 400)]
+    public async Task<IActionResult> PutAsync(int id, [FromBody] CreateManufacturer resource)
     {
-        if (id != manufacturer.Id)
+        var manufacturer = _mapper.Map<CreateManufacturer, Manufacturer>(resource);
+        var result = await _manufacturerService.UpdateAsync(id, manufacturer);
+
+        if (!result.Success)
         {
-            return BadRequest();
-        }
-        var manufacturerObj = await _manufacturerRepository.GetByIdAsync(id);
-        if (manufacturerObj is null)
-        {
-            return NotFound();
+            return BadRequest(new ErrorResponse(result.Message));
         }
 
-        await _manufacturerRepository.UpdateAsync(manufacturerObj);
-
-        return Ok();
+        var categoryResource = _mapper.Map<Manufacturer, ReadManufacturer>(result.Resource);
+        return Ok(categoryResource);
     }
 
-    // DELETE api/<ManufacturersController>/5
+    /// <summary>
+    /// Deletes a given manufacturer according to an identifier.
+    /// </summary>
+    /// <param name="id">Manufacturer identifier.</param>
+    /// <returns>Response for the request.</returns>
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    [ProducesResponseType(typeof(ReadManufacturer), 200)]
+    [ProducesResponseType(typeof(ErrorResponse), 400)]
+    public async Task<IActionResult> DeleteAsync(int id)
     {
-        var manufacturerObj = await _manufacturerRepository.GetByIdAsync(id);
-        if (manufacturerObj is null)
+        var result = await _manufacturerService.DeleteAsync(id);
+
+        if (!result.Success)
         {
-            return NotFound();
+            return BadRequest(new ErrorResponse(result.Message));
         }
-        await _manufacturerRepository.DeleteAsync(manufacturerObj);
-        return Ok();
+
+        var categoryResource = _mapper.Map<Manufacturer, ReadManufacturer>(result.Resource);
+        return Ok(categoryResource);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RentCar.Application.Intefaces;
+using RentCar.Application.Intefaces.Repositories;
 using RentCar.Domain.Common;
 using RentCar.Infrastructure.Data;
 
@@ -27,21 +27,22 @@ namespace RentCar.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<T>?> GetAllAsync()
+        public async Task<List<T>> ToListAsync()
         {
             return await _dbContext
                 .Set<T>()
+                .AsNoTracking()
                 .ToListAsync();
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public async Task<T> FindByIdAsync(int id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
         public async Task UpdateAsync(T entity)
         {
-            T? exist = _dbContext.Set<T>().Find(entity.Id);
+            T exist = _dbContext.Set<T>().Find(entity.Id);
             if (exist != null)
             {
                 _dbContext.Entry(exist).CurrentValues.SetValues(entity);
