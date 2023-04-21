@@ -1,5 +1,4 @@
-﻿
-namespace RentCar.API.Resources;
+﻿namespace RentCar.Application.Resources;
 public class QueryResultResource<T>
 {
     public int TotalItems { get; set; } = 0;

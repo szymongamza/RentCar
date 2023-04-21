@@ -5,6 +5,8 @@ using RentCar.Infrastructure.Data;
 using RentCar.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using RentCar.Application.Interfaces.Repositories;
+using RentCar.Application.Interfaces.Services;
+using RentCar.Infrastructure.Services;
 
 namespace RentCar.Infrastructure;
 public static class DependencyInjection
@@ -18,6 +20,10 @@ public static class DependencyInjection
         services.AddScoped<IVehicleModelRepository, VehicleModelRepository>();
         services.AddScoped<IVehicleRepository, VehicleRepository>();
         services.AddScoped<IOfficeRepository, OfficeRepository>();
+
+        services.AddScoped<IManufacturerService, ManufacturerService>();
+        services.AddScoped<IVehicleModelService, VehicleModelService>();
+        services.AddMemoryCache();
 
 
         return services;

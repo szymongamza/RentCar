@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using RentCar.API.Resources;
-using RentCar.API.Resources.Manufacturer;
 using RentCar.Application.Interfaces.Services;
+using RentCar.Application.Resources;
+using RentCar.Application.Resources.Manufacturer;
 using RentCar.Domain.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

@@ -1,4 +1,4 @@
-﻿namespace RentCar.API.Resources;
+﻿namespace RentCar.Application.Resources;
 
 public class ErrorResource
 {

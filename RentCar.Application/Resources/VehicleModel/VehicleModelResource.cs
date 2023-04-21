@@ -1,6 +1,6 @@
-﻿using RentCar.API.Resources.Manufacturer;
+﻿using RentCar.Application.Resources.Manufacturer;
 
-namespace RentCar.API.Resources.VehicleModel;
+namespace RentCar.Application.Resources.VehicleModel;
 public class VehicleModelResource
 {
     public int Id { get; set; }

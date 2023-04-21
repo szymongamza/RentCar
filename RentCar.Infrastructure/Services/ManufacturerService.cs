@@ -5,7 +5,7 @@ using RentCar.Domain.Common.Responses;
 using RentCar.Domain.Entities;
 using RentCar.Domain.Enums;
 
-namespace RentCar.API.Services;
+namespace RentCar.Infrastructure.Services;
 
 public class ManufacturerService : IManufacturerService
 {
@@ -33,14 +33,14 @@ public class ManufacturerService : IManufacturerService
         }
         catch (Exception ex)
         {
-            // Do some logging stuff
             return new ManufacturerResponse($"An error occurred when deleting the manufacturer: {ex.Message}");
         }
     }
 
     public async Task<IEnumerable<Manufacturer>> ListAsync()
     {
-        var manufacturers = await _cache.GetOrCreateAsync(CacheKeys.ManufacturersList, (entry) => {
+        var manufacturers = await _cache.GetOrCreateAsync(CacheKeys.ManufacturersList, (entry) =>
+        {
             entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
             return _manufacturerRepository.ToListAsync();
         });
@@ -58,7 +58,6 @@ public class ManufacturerService : IManufacturerService
         }
         catch (Exception ex)
         {
-            // Do some logging stuff
             return new ManufacturerResponse($"An error occurred when saving the manufacturer: {ex.Message}");
         }
     }
@@ -79,7 +78,6 @@ public class ManufacturerService : IManufacturerService
         }
         catch (Exception ex)
         {
-            // Do some logging stuff
             return new ManufacturerResponse($"An error occurred when updating the manufacturer: {ex.Message}");
         }
     }

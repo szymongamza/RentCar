@@ -1,6 +1,4 @@
-﻿
-
-namespace RentCar.API.Resources;
+﻿namespace RentCar.Application.Resources;
 public class QueryResource
 {
     public int Page { get; set; }

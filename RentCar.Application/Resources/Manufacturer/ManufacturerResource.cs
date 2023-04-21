@@ -1,4 +1,4 @@
-﻿namespace RentCar.API.Resources.Manufacturer;
+﻿namespace RentCar.Application.Resources.Manufacturer;
 
 public class ManufacturerResource
 {

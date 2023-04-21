@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using RentCar.API.Resources;
-using RentCar.API.Resources.Manufacturer;
-using RentCar.API.Resources.VehicleModel;
 using RentCar.Application.Interfaces.Services;
+using RentCar.Application.Resources;
+using RentCar.Application.Resources.VehicleModel;
 using RentCar.Domain.Common.Query;
 using RentCar.Domain.Entities;
 

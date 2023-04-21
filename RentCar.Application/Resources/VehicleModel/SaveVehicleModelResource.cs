@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RentCar.API.Resources.VehicleModel;
+namespace RentCar.Application.Resources.VehicleModel;
 
 public class SaveVehicleModelResource
 {

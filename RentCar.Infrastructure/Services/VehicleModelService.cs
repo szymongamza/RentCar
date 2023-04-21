@@ -6,7 +6,7 @@ using RentCar.Domain.Common.Responses;
 using RentCar.Domain.Entities;
 using RentCar.Domain.Enums;
 
-namespace RentCar.API.Services;
+namespace RentCar.Infrastructure.Services;
 public class VehicleModelService : IVehicleModelService
 {
     private readonly IManufacturerRepository _manufacturerRepository;
@@ -22,12 +22,13 @@ public class VehicleModelService : IVehicleModelService
     {
         string cacheKey = GetCacheKeyForVehicleModelQuery(query);
 
-        var products = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
+        var vehicleModels = await _cache.GetOrCreateAsync(cacheKey, (entry) =>
+        {
             entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
             return _vehicleModelRepository.ToListAsync(query);
         });
 
-        return products;
+        return vehicleModels;
     }
 
     public async Task<VehicleModelResponse> AddAsync(VehicleModel vehicleModel)
@@ -55,8 +56,8 @@ public class VehicleModelService : IVehicleModelService
         var existingVehicleModel = await _vehicleModelRepository.FindByIdAsync(id);
 
         if (existingVehicleModel == null)
-            return new VehicleModelResponse("Manufacturer not found.");
-        
+            return new VehicleModelResponse("Vehicle model not found.");
+
         var existingManufacturer = await _manufacturerRepository.FindByIdAsync(existingVehicleModel.ManufacturerId);
         if (existingManufacturer == null)
             return new VehicleModelResponse("Invalid manufacturer.");
