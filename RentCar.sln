@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.API", "RentCar.API\RentCar.API.csproj", "{6244946F-7656-40E0-A6CB-8A8DDB8D4F2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentCar.API", "RentCar.API\RentCar.API.csproj", "{6244946F-7656-40E0-A6CB-8A8DDB8D4F2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.Domain", "RentCar.Domain\RentCar.Domain.csproj", "{DBB559AA-69E5-42A6-82F1-28534EBAEDBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentCar.Domain", "RentCar.Domain\RentCar.Domain.csproj", "{DBB559AA-69E5-42A6-82F1-28534EBAEDBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.Application", "RentCar.Application\RentCar.Application.csproj", "{40F0BB3C-F18E-4532-912F-186010F8CA80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentCar.Application", "RentCar.Application\RentCar.Application.csproj", "{40F0BB3C-F18E-4532-912F-186010F8CA80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.Infrastructure", "RentCar.Infrastructure\RentCar.Infrastructure.csproj", "{DB3A431E-7841-4DDA-88A3-02A70118A742}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentCar.Infrastructure", "RentCar.Infrastructure\RentCar.Infrastructure.csproj", "{DB3A431E-7841-4DDA-88A3-02A70118A742}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.UnitTests", "RentCar.UnitTests\RentCar.UnitTests.csproj", "{45B69DA1-95B9-440D-836D-448031A14D54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DB3A431E-7841-4DDA-88A3-02A70118A742}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB3A431E-7841-4DDA-88A3-02A70118A742}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB3A431E-7841-4DDA-88A3-02A70118A742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45B69DA1-95B9-440D-836D-448031A14D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45B69DA1-95B9-440D-836D-448031A14D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45B69DA1-95B9-440D-836D-448031A14D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45B69DA1-95B9-440D-836D-448031A14D54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
