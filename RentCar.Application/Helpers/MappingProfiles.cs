@@ -16,8 +16,13 @@ public class MappingProfiles : Profile
         CreateMap<QueryResult<VehicleModel>, QueryResultResource<VehicleModelResource>>();
 
         //Resource to Model
-        CreateMap<SaveVehicleModelResource, VehicleModel>();
-        CreateMap<SaveManufacturerResource, Manufacturer>();
+        CreateMap<SaveVehicleModelResource, VehicleModel>()
+            .ForMember(x=>x.Manufacturer, opt => opt.Ignore())
+            .ForMember(x=>x.Vehicles, opt => opt.Ignore())
+            .ForMember(x => x.Id, opt=> opt.Ignore());
+        CreateMap<SaveManufacturerResource, Manufacturer>()
+            .ForMember(x=>x.VehicleModels, opt=>opt.Ignore())
+            .ForMember(x=>x.Id, opt => opt.Ignore());
         CreateMap<VehicleModelQueryResource, VehicleModelQuery>();
     }
 }
