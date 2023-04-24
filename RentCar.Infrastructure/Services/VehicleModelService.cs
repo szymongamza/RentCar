@@ -66,9 +66,9 @@ public class VehicleModelService : IVehicleModelService
         existingVehicleModel.ModelName = vehicleModel.ModelName;
         existingVehicleModel.Description = vehicleModel.Description;
         existingVehicleModel.ManufacturerId = vehicleModel.ManufacturerId;
-        existingVehicleModel.CargoCapacity = vehicleModel.CargoCapacity;
+        existingVehicleModel.CargoCapacityInLitres = vehicleModel.CargoCapacityInLitres;
         existingVehicleModel.NumberOfSeats = vehicleModel.NumberOfSeats;
-        existingVehicleModel.Range = vehicleModel.Range;
+        existingVehicleModel.RangeInKilometers = vehicleModel.RangeInKilometers;
 
         try
         {

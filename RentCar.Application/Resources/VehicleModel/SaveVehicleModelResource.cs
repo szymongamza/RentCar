@@ -13,11 +13,9 @@ public class SaveVehicleModelResource
     [Required]
     public int NumberOfSeats { get; set; }
     [Required]
-    [MaxLength(50)]
-    public string Range { get; set; }
+    public double RangeInKilometers { get; set; }
     [Required]
-    [MaxLength(50)]
-    public string CargoCapacity { get; set; }
+    public double CargoCapacityInLitres { get; set; }
     [Required]
     public int ManufacturerId { get; set; }
 }
