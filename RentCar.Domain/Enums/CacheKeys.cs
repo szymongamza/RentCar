@@ -6,5 +6,6 @@ public enum CacheKeys : byte
 {
     ManufacturersList,
     VehicleModelsList,
-    VehicleList
+    VehicleList,
+    OfficesList
 }

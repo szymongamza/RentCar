@@ -3,6 +3,7 @@ using AutoMapper;
 using RentCar.Application.Helpers;
 using RentCar.Application.Resources;
 using RentCar.Application.Resources.Manufacturer;
+using RentCar.Application.Resources.Office;
 using RentCar.Application.Resources.Vehicle;
 using RentCar.Application.Resources.VehicleModel;
 using RentCar.Domain.Common.Query;
@@ -45,6 +46,9 @@ namespace RentCar.UnitTests.Mappings
         [InlineData(typeof(QueryResult<Vehicle>), typeof(QueryResultResource<VehicleResource>))]
         [InlineData(typeof(SaveVehicleResource), typeof(Vehicle))]
         [InlineData(typeof(VehicleQueryResource), typeof(VehicleQuery))]
+
+        [InlineData(typeof(SaveOfficeResource), typeof(Office))]
+        [InlineData(typeof(Office), typeof(OfficeResource))]
         public void Map_SourceToDestination_ExistConfiguration(Type origin, Type destination)
         {
             var instance = FormatterServices.GetUninitializedObject(origin);

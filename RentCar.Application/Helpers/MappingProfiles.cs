@@ -4,6 +4,7 @@ using RentCar.Domain.Entities;
 using RentCar.Application.Resources;
 using RentCar.Application.Resources.VehicleModel;
 using RentCar.Application.Resources.Manufacturer;
+using RentCar.Application.Resources.Office;
 using RentCar.Application.Resources.Vehicle;
 
 namespace RentCar.Application.Helpers;
@@ -12,6 +13,7 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
+        //######################### Model to Resource ##################################
         CreateMap<Manufacturer, ManufacturerResource>();
 
         CreateMap<VehicleModel, VehicleModelResource>();
@@ -20,8 +22,10 @@ public class MappingProfiles : Profile
         CreateMap<Vehicle, VehicleResource>();
         CreateMap<QueryResult<Vehicle>, QueryResultResource<VehicleResource>>();
 
+        CreateMap<Office, OfficeResource>();
 
-        //Resource to Model
+
+        //################## Resource to Model ###################################
         CreateMap<SaveManufacturerResource, Manufacturer>()
             .ForMember(x => x.VehicleModels, opt => opt.Ignore())
             .ForMember(x => x.Id, opt => opt.Ignore());
@@ -36,6 +40,9 @@ public class MappingProfiles : Profile
             .ForMember(x=>x.VehicleModel, opt => opt.Ignore())
             .ForMember(x=>x.Id, opt => opt.Ignore());
         CreateMap<VehicleQueryResource, VehicleQuery>();
+
+        CreateMap<SaveOfficeResource, Office>()
+            .ForMember(x => x.Id, opt => opt.Ignore());
 
     }
 }
