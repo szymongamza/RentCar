@@ -9,11 +9,15 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddControllers();
+builder.Services.AddDateOnlyTimeOnlyStringConverters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "RentCar", Version = "v1", Description = "API for renting car" })
-);
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "RentCar", Version = "v1", Description = "API for renting car" });
+        c.UseDateOnlyTimeOnlyStringConverters();
+    });
+
 
 var app = builder.Build();
 

@@ -23,6 +23,7 @@ public static class DependencyInjection
 
         services.AddScoped<IManufacturerService, ManufacturerService>();
         services.AddScoped<IVehicleModelService, VehicleModelService>();
+        services.AddScoped<IOfficeService, OfficeService>();
         services.AddMemoryCache();
 
 
