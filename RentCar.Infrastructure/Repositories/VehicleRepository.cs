@@ -13,7 +13,9 @@ public class VehicleRepository : GenericRepository<Vehicle>, IVehicleRepository
     public async Task<QueryResult<Vehicle>> ToListAsync(VehicleQuery query)
     {
         IQueryable<Vehicle> queryable = _dbContext.Vehicles
-            .Include(p => p.VehicleModel)
+            .Include(p => p.VehicleModel).AsSingleQuery()
+            .Include(p=>p.VehicleModel.Manufacturer).AsSingleQuery()
+            .Include(p=>p.Bookings).AsSingleQuery()
             .AsNoTracking();
 
         // AsNoTracking tells EF Core it doesn't need to track changes on listed entities. Disabling entity
@@ -21,6 +23,11 @@ public class VehicleRepository : GenericRepository<Vehicle>, IVehicleRepository
         if (query.VehicleModelId is > 0)
         {
             queryable = queryable.Where(p => p.VehicleModelId == query.VehicleModelId);
+        }
+
+        if (query.StartDateTime is not null)
+        {
+            //queryable = queryable.Where() //TODO
         }
 
         // Here I count all items present in the database for the given query, to return as part of the pagination data.

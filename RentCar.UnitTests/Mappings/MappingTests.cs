@@ -2,6 +2,7 @@ using System.Runtime.Serialization;
 using AutoMapper;
 using RentCar.Application.Helpers;
 using RentCar.Application.Resources;
+using RentCar.Application.Resources.Booking;
 using RentCar.Application.Resources.Manufacturer;
 using RentCar.Application.Resources.Office;
 using RentCar.Application.Resources.Vehicle;
@@ -49,6 +50,11 @@ namespace RentCar.UnitTests.Mappings
 
         [InlineData(typeof(SaveOfficeResource), typeof(Office))]
         [InlineData(typeof(Office), typeof(OfficeResource))]
+
+        [InlineData(typeof(Booking), typeof(BookingResource))]
+        [InlineData(typeof(QueryResult<Booking>), typeof(QueryResultResource<BookingResource>))]
+        [InlineData(typeof(SaveBookingResource), typeof(Booking))]
+        [InlineData(typeof(BookingQueryResource), typeof(BookingQuery))]
         public void Map_SourceToDestination_ExistConfiguration(Type origin, Type destination)
         {
             var instance = FormatterServices.GetUninitializedObject(origin);

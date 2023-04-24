@@ -8,7 +8,7 @@ namespace RentCar.Application.Resources.Vehicle
         [Required]
         [MaxLength(20)]
         public string RegistrationNumber { get; set; }
-        public byte[] Image { get; set; }
+        public string ImagePath { get; set; }
         [Required]
         public double DailyPrice { get; set; }
         [Required]

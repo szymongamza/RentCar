@@ -73,7 +73,7 @@ public class VehicleService : IVehicleService
         existingVehicle.Status = vehicle.Status;
         existingVehicle.RegistrationNumber = vehicle.RegistrationNumber;
         existingVehicle.DailyPrice = vehicle.DailyPrice;
-        existingVehicle.Image = vehicle.Image;
+        existingVehicle.ImagePath = vehicle.ImagePath;
         existingVehicle.Description = vehicle.Description;
 
         try

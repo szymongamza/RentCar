@@ -20,10 +20,13 @@ public static class DependencyInjection
         services.AddScoped<IVehicleModelRepository, VehicleModelRepository>();
         services.AddScoped<IVehicleRepository, VehicleRepository>();
         services.AddScoped<IOfficeRepository, OfficeRepository>();
+        services.AddScoped<IBookingRepository, BookingRepository>();
 
         services.AddScoped<IManufacturerService, ManufacturerService>();
         services.AddScoped<IVehicleModelService, VehicleModelService>();
+        services.AddScoped<IVehicleService, VehicleService>();
         services.AddScoped<IOfficeService, OfficeService>();
+        services.AddScoped<IBookingService, BookingService>();
         services.AddMemoryCache();
 
 

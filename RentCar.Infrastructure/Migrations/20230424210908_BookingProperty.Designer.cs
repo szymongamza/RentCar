@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentCar.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using RentCar.Infrastructure.Data;
 namespace RentCar.Infrastructure.Migrations
 {
     [DbContext(typeof(RentCarDbContext))]
-    partial class RentCarDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230424210908_BookingProperty")]
+    partial class BookingProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -61,7 +64,7 @@ namespace RentCar.Infrastructure.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Bookings", (string)null);
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("RentCar.Domain.Entities.Manufacturer", b =>
@@ -75,7 +78,7 @@ namespace RentCar.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturers", (string)null);
+                    b.ToTable("Manufacturers");
                 });
 
             modelBuilder.Entity("RentCar.Domain.Entities.Office", b =>
@@ -104,7 +107,7 @@ namespace RentCar.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Offices", (string)null);
+                    b.ToTable("Offices");
                 });
 
             modelBuilder.Entity("RentCar.Domain.Entities.Vehicle", b =>
@@ -119,8 +122,8 @@ namespace RentCar.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("TEXT");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("RegistrationNumber")
                         .HasColumnType("TEXT");
@@ -138,7 +141,7 @@ namespace RentCar.Infrastructure.Migrations
 
                     b.HasIndex("VehicleModelId");
 
-                    b.ToTable("Vehicles", (string)null);
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("RentCar.Domain.Entities.VehicleModel", b =>
@@ -169,7 +172,7 @@ namespace RentCar.Infrastructure.Migrations
 
                     b.HasIndex("ManufacturerId");
 
-                    b.ToTable("VehicleModels", (string)null);
+                    b.ToTable("VehicleModels");
                 });
 
             modelBuilder.Entity("RentCar.Domain.Entities.Booking", b =>
