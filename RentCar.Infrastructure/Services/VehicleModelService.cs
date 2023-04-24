@@ -104,7 +104,7 @@ public class VehicleModelService : IVehicleModelService
 
         if (query.ManufacturerId is > 0)
         {
-            key = string.Concat(key, "_", query.ManufacturerId.Value);
+            key = string.Concat(key, "_", "mid:", query.ManufacturerId.Value);
         }
 
         key = string.Concat(key, "_", query.Page, "_", query.ItemsPerPage);
