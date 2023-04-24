@@ -12,7 +12,6 @@ public class Vehicle : BaseEntity
     public string Mileage { get; set; }
     public int NumberOfSeats { get; set; }
     public bool? Status { get; set; }
-    public int VehicleTypeId { get; set; }
     public int VehicleModelId { get; set; }
     public VehicleModel VehicleModel { get; set; }
 }
