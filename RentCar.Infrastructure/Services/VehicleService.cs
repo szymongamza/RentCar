@@ -70,13 +70,11 @@ public class VehicleService : IVehicleService
         existingVehicle.Year = vehicle.Year;
         existingVehicle.Description = vehicle.Description;
         existingVehicle.VehicleModelId = vehicle.VehicleModelId;
-        existingVehicle.NumberOfSeats = vehicle.NumberOfSeats;
         existingVehicle.Status = vehicle.Status;
         existingVehicle.RegistrationNumber = vehicle.RegistrationNumber;
         existingVehicle.DailyPrice = vehicle.DailyPrice;
         existingVehicle.Image = vehicle.Image;
         existingVehicle.Description = vehicle.Description;
-        existingVehicle.Mileage = vehicle.Mileage;
 
         try
         {

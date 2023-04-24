@@ -16,11 +16,6 @@ namespace RentCar.Application.Resources.Vehicle
         public string Description { get; set; }
         public DateTime Year { get; set; }
         [Required]
-        [MaxLength(10)]
-        public string Mileage { get; set; }
-        [Required]
-        public int NumberOfSeats { get; set; }
-        [Required]
         public bool? Status { get; set; }
         public int VehicleModelId { get; set; }
     }
