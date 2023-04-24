@@ -97,7 +97,7 @@ public class VehicleModelsController : ControllerBase
             return BadRequest(new ErrorResource(result.Message));
         }
 
-        var categoryResource = _mapper.Map<VehicleModel, VehicleModelResource>(result.Resource);
-        return Ok(categoryResource);
+        var vehicleModelResource = _mapper.Map<VehicleModel, VehicleModelResource>(result.Resource);
+        return Ok(vehicleModelResource);
     }
 }

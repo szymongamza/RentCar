@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentCar.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using RentCar.Infrastructure.Data;
 namespace RentCar.Infrastructure.Migrations
 {
     [DbContext(typeof(RentCarDbContext))]
-    partial class RentCarDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230424111307_VehicleModelProperties")]
+    partial class VehicleModelProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -105,8 +108,8 @@ namespace RentCar.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("CargoCapacityInLitres")
-                        .HasColumnType("REAL");
+                    b.Property<string>("CargoCapacity")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
@@ -120,8 +123,8 @@ namespace RentCar.Infrastructure.Migrations
                     b.Property<int>("NumberOfSeats")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("RangeInKilometers")
-                        .HasColumnType("REAL");
+                    b.Property<string>("Range")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

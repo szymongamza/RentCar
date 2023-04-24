@@ -66,6 +66,9 @@ public class VehicleModelService : IVehicleModelService
         existingVehicleModel.ModelName = vehicleModel.ModelName;
         existingVehicleModel.Description = vehicleModel.Description;
         existingVehicleModel.ManufacturerId = vehicleModel.ManufacturerId;
+        existingVehicleModel.CargoCapacityInLitres = vehicleModel.CargoCapacityInLitres;
+        existingVehicleModel.NumberOfSeats = vehicleModel.NumberOfSeats;
+        existingVehicleModel.RangeInKilometers = vehicleModel.RangeInKilometers;
 
         try
         {
@@ -104,7 +107,7 @@ public class VehicleModelService : IVehicleModelService
 
         if (query.ManufacturerId is > 0)
         {
-            key = string.Concat(key, "_", query.ManufacturerId.Value);
+            key = string.Concat(key, "_", "mid:", query.ManufacturerId.Value);
         }
 
         key = string.Concat(key, "_", query.Page, "_", query.ItemsPerPage);
