@@ -42,6 +42,7 @@ public class MappingProfiles : Profile
 
         CreateMap<SaveVehicleResource, Vehicle>()
             .ForMember(x=>x.VehicleModel, opt => opt.Ignore())
+            .ForMember(x=>x.Bookings, opt => opt.Ignore())
             .ForMember(x=>x.Id, opt => opt.Ignore());
         CreateMap<VehicleQueryResource, VehicleQuery>();
 
