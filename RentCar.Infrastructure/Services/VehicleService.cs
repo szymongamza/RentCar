@@ -73,7 +73,7 @@ public class VehicleService : IVehicleService
         existingVehicle.Status = vehicle.Status;
         existingVehicle.RegistrationNumber = vehicle.RegistrationNumber;
         existingVehicle.DailyPrice = vehicle.DailyPrice;
-        existingVehicle.Image = vehicle.Image;
+        existingVehicle.ImagePath = vehicle.ImagePath;
         existingVehicle.Description = vehicle.Description;
 
         try
@@ -115,6 +115,12 @@ public class VehicleService : IVehicleService
         if (query.VehicleModelId is > 0)
         {
             key = string.Concat(key, "_", "vmid:" , query.VehicleModelId.Value);
+        }
+
+        if (query.StartDateTime is not null && query.EndDateTime is not null)
+        {
+            key = string.Concat(key, "_", "ts:", query.StartDateTime.Value);
+            key = string.Concat(key, "_", "te:", query.EndDateTime.Value);
         }
 
         key = string.Concat(key, "_", query.Page, "_", query.ItemsPerPage);
