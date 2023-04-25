@@ -25,10 +25,9 @@ public class VehicleRepository : GenericRepository<Vehicle>, IVehicleRepository
             queryable = queryable.Where(p => p.VehicleModelId == query.VehicleModelId);
         }
 
-        if (query.StartDateTime is not null)
-        {
-            //queryable = queryable.Where() //TODO
-        }
+        if (query.StartDateTime is not null && query.EndDateTime is not null)
+            queryable = queryable.Where(v => !v.Bookings.Any(b => b.PickUpTime <= query.EndDateTime && b.DropOffTime >= query.StartDateTime));
+
 
         // Here I count all items present in the database for the given query, to return as part of the pagination data.
         int totalItems = await queryable.CountAsync();

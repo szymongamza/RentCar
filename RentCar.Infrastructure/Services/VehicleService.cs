@@ -117,6 +117,12 @@ public class VehicleService : IVehicleService
             key = string.Concat(key, "_", "vmid:" , query.VehicleModelId.Value);
         }
 
+        if (query.StartDateTime is not null && query.EndDateTime is not null)
+        {
+            key = string.Concat(key, "_", "ts:", query.StartDateTime.Value);
+            key = string.Concat(key, "_", "te:", query.EndDateTime.Value);
+        }
+
         key = string.Concat(key, "_", query.Page, "_", query.ItemsPerPage);
         return key;
     }
