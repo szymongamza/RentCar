@@ -22,7 +22,7 @@ public class OfficeService : IOfficeService
     {
         var offices = await _cache.GetOrCreateAsync(CacheKeys.OfficesList, (entry) =>
         {
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
             return _officeRepository.ToListAsync();
         });
 
@@ -56,6 +56,7 @@ public class OfficeService : IOfficeService
         existingOffice.TimeOpen = office.TimeOpen;
         existingOffice.TimeClose = office.TimeClose;
         existingOffice.Description = office.Description;
+        existingOffice.ImagePath = office.ImagePath;
 
         try
         {

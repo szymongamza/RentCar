@@ -41,7 +41,7 @@ public class ManufacturerService : IManufacturerService
     {
         var manufacturers = await _cache.GetOrCreateAsync(CacheKeys.ManufacturersList, (entry) =>
         {
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
             return _manufacturerRepository.ToListAsync();
         });
 

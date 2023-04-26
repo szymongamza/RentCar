@@ -24,7 +24,7 @@ public class VehicleModelService : IVehicleModelService
 
         var vehicleModels = await _cache.GetOrCreateAsync(cacheKey, (entry) =>
         {
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
             return _vehicleModelRepository.ToListAsync(query);
         });
 
