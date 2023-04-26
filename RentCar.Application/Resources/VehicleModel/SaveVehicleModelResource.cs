@@ -17,5 +17,7 @@ public class SaveVehicleModelResource
     [Required]
     public double CargoCapacityInLitres { get; set; }
     [Required]
+    public string ImagePath { get; set; }
+    [Required]
     public int ManufacturerId { get; set; }
 }

@@ -69,6 +69,7 @@ public class VehicleModelService : IVehicleModelService
         existingVehicleModel.CargoCapacityInLitres = vehicleModel.CargoCapacityInLitres;
         existingVehicleModel.NumberOfSeats = vehicleModel.NumberOfSeats;
         existingVehicleModel.RangeInKilometers = vehicleModel.RangeInKilometers;
+        existingVehicleModel.ImagePath = vehicleModel.ImagePath;
 
         try
         {
