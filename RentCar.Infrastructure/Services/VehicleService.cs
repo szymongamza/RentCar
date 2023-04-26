@@ -25,11 +25,13 @@ public class VehicleService : IVehicleService
     
     public async Task<QueryResult<Vehicle>> ListAsync(VehicleQuery query)
     {
-        string cacheKey = GetCacheKeyForVehicleQuery(query);
+        if (query.StartDateTime is not null && query.EndDateTime is not null)
+            return await _vehicleRepository.ToListAsync(query);
 
+        string cacheKey = GetCacheKeyForVehicleQuery(query);
         var vehicles = await _cache.GetOrCreateAsync(cacheKey, (entry) =>
         {
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
             return _vehicleRepository.ToListAsync(query);
         });
 
@@ -115,12 +117,6 @@ public class VehicleService : IVehicleService
         if (query.VehicleModelId is > 0)
         {
             key = string.Concat(key, "_", "vmid:" , query.VehicleModelId.Value);
-        }
-
-        if (query.StartDateTime is not null && query.EndDateTime is not null)
-        {
-            key = string.Concat(key, "_", "ts:", query.StartDateTime.Value);
-            key = string.Concat(key, "_", "te:", query.EndDateTime.Value);
         }
 
         key = string.Concat(key, "_", query.Page, "_", query.ItemsPerPage);
