@@ -40,14 +40,14 @@ function OfficesCarousel() {
             <Carousel.Item key={office.id}>
                 <img
                   className="d-block w-100"
-                  src={"office1.jpg"}
+                  src={office.imagePath}
                   alt={office.officeName}
                 />
                 <Carousel.Caption>
                     <h3>{office.officeName}</h3>
                     <p>{office.address}</p>
                     <p>{office.phoneNumber}</p>
-                    <p>{office.timeOpen} till {office.timeClose}</p>
+                    <p>{office.timeOpen.slice(0,5)} till {office.timeClose.slice(0,5)}</p>
                 </Carousel.Caption>
             </Carousel.Item>
         ))}

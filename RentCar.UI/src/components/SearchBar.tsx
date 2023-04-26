@@ -4,19 +4,18 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router-dom';
 
-interface SearchFormProps {
-  onSearch: (fromDate: string, fromTime: string, toDate: string, toTime: string) => void;
-}
-
-function SearchBar({ onSearch }: SearchFormProps) {
-  const currentDate = new Date().toISOString().substr(0, 10);
+function SearchBar() {
+  const currentDate = new Date().toISOString().slice(0, 10);
+  const navigate = useNavigate();
 
   const [fromDate, setFromDate] = useState('');
   const [fromTime, setFromTime] = useState('');
   const [toDate, setToDate] = useState('');
   const [toTime, setToTime] = useState('');
   const [showModal, setShowModal] = useState(false);
+  
 
   const handleFromDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFromDate(event.target.value);
@@ -43,7 +42,9 @@ function SearchBar({ onSearch }: SearchFormProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isAfter(fromDate, fromTime, toDate, toTime)) {
-      onSearch(fromDate, fromTime, toDate, toTime);
+      navigate(
+        `/availability?fromDate=${fromDate}&fromTime=${fromTime}&toDate=${toDate}&toTime=${toTime}`
+      );
     } else {
       setShowModal(true);
     }
@@ -55,7 +56,6 @@ function SearchBar({ onSearch }: SearchFormProps) {
 
   return (
     <div>
-        <h2 className='text-center'>Check availability:</h2>
     <Form onSubmit={handleSubmit} className="mx-auto w-50 mt-3 text-center">
         <Row>
             <Col>
