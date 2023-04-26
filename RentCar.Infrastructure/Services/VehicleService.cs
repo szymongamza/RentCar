@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Caching.Memory;
 using RentCar.Application.Interfaces.Repositories;
 using RentCar.Application.Interfaces.Services;
@@ -45,6 +46,10 @@ public class VehicleService : IVehicleService
             var existingVehicleModel = await _vehicleModelRepository.FindByIdAsync(vehicle.VehicleModelId);
             if (existingVehicleModel == null)
                 return new VehicleResponse("Invalid vehicle model.");
+            if (vehicle.ImagePath is null || vehicle.ImagePath.Length == 0)
+            {
+                vehicle.ImagePath = existingVehicleModel.ImagePath;
+            }
 
             await _vehicleRepository.AddAsync(vehicle);
 
