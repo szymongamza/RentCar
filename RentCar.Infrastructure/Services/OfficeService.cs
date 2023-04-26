@@ -60,7 +60,7 @@ public class OfficeService : IOfficeService
 
         try
         {
-
+            await _officeRepository.UpdateAsync(existingOffice);
             return new OfficeResponse(existingOffice);
         }
         catch (Exception ex)
