@@ -1,24 +1,20 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import OurVehicles from './components/OurVehicles';
+import NavBar from './components/NavBar';
+import VehicleModelsCarousel from './components/VehicleModelsCarousel';
+import SearchBar from './components/SearchBar';
+const handleSearch = (fromDate: string, toDate: string) => {
+  // Make API call with fromDate and toDate values
+  // Update searchResults state with API response
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <VehicleModelsCarousel/>
+    <SearchBar onSearch={handleSearch}/>
     </div>
   );
 }
