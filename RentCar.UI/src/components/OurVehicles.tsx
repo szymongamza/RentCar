@@ -92,7 +92,7 @@ function OurVehicles() {
         ))}
       </Row>
     </Container>
-        <Stack direction="horizontal" gap={2}>
+        <Stack direction="horizontal" gap={5}>
           <Button onClick={handlePrevPage} disabled={hasPreviousPage()}>Previous</Button>
           <Button onClick={handleNextPage} disabled={!hasNextPage()}>Next</Button>
         </Stack>

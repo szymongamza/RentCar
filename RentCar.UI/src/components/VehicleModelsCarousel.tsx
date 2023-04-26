@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 import './VehicleModelsCarousel.css';
-import {Button} from 'react-bootstrap';
 
 
 function VehicleModelsCarousel() {
@@ -53,8 +52,9 @@ function VehicleModelsCarousel() {
                   alt={vehicleModel.manufacturer.manufacturerName + vehicleModel.modelName}
                 />
                 <Carousel.Caption>
-                    <h3>{vehicleModel.manufacturer.manufacturerName}</h3>
-                    <p>{vehicleModel.modelName}</p>
+                    <h3>{vehicleModel.manufacturer.manufacturerName} {vehicleModel.modelName}</h3>
+                    <p>Number of seats: {vehicleModel.numberOfSeats}</p>
+                    <p>Range: {vehicleModel.rangeInKilometers}km</p>
                 </Carousel.Caption>
             </Carousel.Item>
         ))}

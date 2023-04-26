@@ -1,21 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import OurVehicles from './components/OurVehicles';
 import NavBar from './components/NavBar';
-import VehicleModelsCarousel from './components/VehicleModelsCarousel';
-import SearchBar from './components/SearchBar';
-const handleSearch = (fromDate: string, toDate: string) => {
-  // Make API call with fromDate and toDate values
-  // Update searchResults state with API response
-};
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from './components/Home';
+import OurVehicles from './components/OurVehicles';
+import OfficesCarousel from './components/OfficesCarousel';
+
 
 function App() {
   return (
-    <div>
-    <VehicleModelsCarousel/>
-    <SearchBar onSearch={handleSearch}/>
-    </div>
+
+    <Router>
+      <NavBar/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/cars" element={<OurVehicles/>}/>
+        <Route path="/offices" element={<OfficesCarousel/>}/>
+      </Routes>
+    </Router>
+
   );
 }
 
