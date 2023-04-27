@@ -6,6 +6,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useLocation } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import BookingModal from './BookingModal';
+import Spinner from 'react-bootstrap/Spinner';
+import {VehicleModelResource, VehicleResourceQueryResult, VehicleResource, ManufacturerResource} from '../interfaces';
+import vehicleService from '../services/vehicleService';
 
 function Availability() {
     const [vehicles, setVehicles] = useState<VehicleResource[]>([]);
@@ -15,55 +19,9 @@ function Availability() {
     const [totalItems, setTotalItems] = useState<number>(0);
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const fromDate = searchParams.get('fromDate') ?? '';
-    const fromTime = searchParams.get('fromTime') ?? '';
-    const toDate = searchParams.get('toDate') ?? '';
-    const toTime = searchParams.get('toTime') ?? '';
+    const fromDateTime = searchParams.get('fromDateTime') ?? '';
+    const toDateTime = searchParams.get('toDateTime') ?? '';
 
-    interface VehicleResourceQueryResult{
-      totalItems: number,
-      items: VehicleResource[]
-    }
-
-    interface VehicleResource{
-      id:	number,
-      registrationNumber?:	string,
-      imagePath?: string,
-      dailyPrice:	number,
-      description?:	string,
-      year:	string,
-      status?:	boolean,
-      vehicleModel: VehicleModelResource
-    }
-
-    interface VehicleModelResource{
-      id:	number,
-      modelName?:	string,
-      description?:	string,
-      imagePath: string,
-      numberOfSeats:	number,
-      rangeInKilometers:	number,
-      cargoCapacityInLitres:	number,
-      manufacturer: ManufacturerResource
-    }
-
-    interface ManufacturerResource{
-      id:	number,
-      manufacturerName:	string
-    }
-
-    useEffect(() => {
-        const fromDateTime = new Date(`${fromDate}T${fromTime}`).toISOString();
-        const toDateTime = new Date(`${toDate}T${toTime}`).toISOString();
-        const url = encodeURI(`http://localhost:5245/api/Vehicles?page=${page}&itemsPerPage=${itemsPerPage}&StartDateTime=${fromDateTime}&EndDateTime=${toDateTime}`)
-      const fetchVehicles = async () => {
-        const response = await fetch(url);
-        const data: VehicleResourceQueryResult = await response.json();
-        setVehicles(data.items);
-        setTotalItems(data.totalItems);
-      };
-      fetchVehicles();
-    }, [page, itemsPerPage, fromDate, fromTime, toDate, toTime]);
 
     const handlePrevPage = () => {
       setPage((prev) => prev- 1 );
@@ -81,9 +39,34 @@ function Availability() {
       return page == 1;
     };
 
+    useEffect(() => {
+      const fetchTime = () => {
+        vehicleService.QueryVehicles(page,itemsPerPage,fromDateTime,toDateTime)
+        .then((response: any) => {
+          const data = response.data;
+          setVehicles(data.items);
+          setTotalItems(data.totalItems);
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+      };
+      fetchTime();
+    }, [page]);
+  
+    if (vehicles.length ==0) {
+      return (
+        <div className="d-flex justify-content-center align-items-center mt-10" >
+          <Spinner animation="border" variant="primary" />
+        </div>
+      )
+    }
+
+
   return (
     <div className="container">
-        <SearchBar></SearchBar>
+        <SearchBar selectedStartDateTime={fromDateTime} selectedEndDateTime={toDateTime}/>
     <h1 className="mt-3 mb-3">Available Vehicles</h1>
     <Pagination className="mt-3">
       <Pagination.Prev onClick={handlePrevPage} disabled={!hasPreviousPage()} />
@@ -107,6 +90,7 @@ function Availability() {
               <p className="card-text">{vehicle.vehicleModel.cargoCapacityInLitres}L of cargo space</p>
               <p className="card-text">${vehicle.dailyPrice} per day</p>
               <Button variant="primary" className="w-100 mt-3">Book</Button>
+              <BookingModal vehicle={vehicle} startDateTime={fromDateTime} endDateTime={toDateTime}/>
             </div>
           </div>
         </Col>
@@ -121,6 +105,8 @@ function Availability() {
       ))}
       <Pagination.Next onClick={handleNextPage} disabled={!hasNextPage()} />
     </Pagination>
+
+
   </div>
   );
 }
