@@ -27,6 +27,7 @@ public static class DependencyInjection
         services.AddScoped<IVehicleService, VehicleService>();
         services.AddScoped<IOfficeService, OfficeService>();
         services.AddScoped<IBookingService, BookingService>();
+        services.AddScoped<IDateTimeService, DateTimeService>();
         services.AddMemoryCache();
 
 
