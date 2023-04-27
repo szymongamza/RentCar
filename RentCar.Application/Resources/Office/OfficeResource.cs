@@ -10,4 +10,5 @@ public class OfficeResource
     public TimeOnly TimeOpen { get; set; }
     public TimeOnly TimeClose { get; set; }
     public string Description { get; set; }
+    public string ImagePath { get; set; }
 }
