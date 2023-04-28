@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
 import { VehicleResource, VehicleModelResource, ManufacturerResource } from "../interfaces";
+import bookingService from "../services/bookingService";
 
 interface BookingProps{
     vehicle: VehicleResource,
@@ -63,16 +63,20 @@ const BookingModal = (props: BookingProps) => {
           emailAddress: emailAddress,
           phoneNumber: phoneNumber
         };
-      
-        // Make a POST request to the API endpoint using axios
-        axios.post("your-api-endpoint-url", formData)
-          .then(() => {
-            // Handle successful response
-            console.log("send");
-          });
-      
-        // Close the modal
+            
+          const postBooking = () => {
+            bookingService.create(formData)
+            .then((response: any) => {
+              console.log(response.data);
+            })
+            .catch((e: Error) => {
+              console.log(e);
+            });
+          };
+          postBooking();
+
         handleClose();
+
       };
 
   
@@ -91,12 +95,15 @@ const BookingModal = (props: BookingProps) => {
             <Form onSubmit={handleSubmit}>  
               <Form.Group controlId="pickUpOfficeId">
                 <Form.Label>Pick-up office ID</Form.Label>
-                <Form.Control type="number" value={pickUpOfficeId} onChange={handlePickUpOfficeIdChange} placeholder="Enter pick-up office ID" />
+                <Form.Control type="select" value={pickUpOfficeId} onChange={handlePickUpOfficeIdChange}>
+                  <option value="1">Office1</option>
+
+                </Form.Control>
               </Form.Group>
   
               <Form.Group controlId="dropOffOfficeId">
                 <Form.Label>Drop-off office ID</Form.Label>
-                <Form.Control type="text" placeholder="Enter drop-off office ID" />
+                <Form.Control type="number" placeholder="Enter drop-off office ID" />
               </Form.Group>
   
               <Form.Group controlId="userName">

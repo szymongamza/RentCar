@@ -2,44 +2,37 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 import './VehicleModelsCarousel.css';
+import Spinner from 'react-bootstrap/Spinner';
+import vehicleModelService from '../services/vehicleModelService'
+import { VehicleModelResourceQueryResult, VehicleModelResource, ManufacturerResource } from '../interfaces';
 
 
 function VehicleModelsCarousel() {
     const [vehiclesModels, setVehiclesModels] = useState<VehicleModelResource[]>([]);
     const [error, setError] = useState({});
 
-    interface VehicleModelResourceQueryResult{
-        totalItems: number,
-        items: VehicleModelResource[]
-      }
-
-    interface VehicleModelResource{
-      id:	number,
-      modelName?:	string,
-      description?:	string,
-      imagePath: string,
-      numberOfSeats:	number,
-      rangeInKilometers:	number,
-      cargoCapacityInLitres:	number,
-      manufacturer: ManufacturerResource
-    }
-
-    interface ManufacturerResource{
-      id:	number,
-      manufacturerName:	string
-    }
-
     useEffect(() => {
-      const fetchVehiclesModels = async () => {
-        const response = await fetch(
-          `http://localhost:5245/api/VehicleModels`
-        );
-        const data: VehicleModelResourceQueryResult = await response.json();
-        setVehiclesModels(data.items);
+      const fetchVehicleModels = () => {
+        vehicleModelService.GetVehicleModels()
+        .then((response: any) => {
+          const data = response.data;
+          setVehiclesModels(data.items);
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
       };
-      fetchVehiclesModels();
+      fetchVehicleModels();
     }, []);
-
+  
+    if (vehiclesModels.length ==0) {
+      return (
+        <div className="d-flex justify-content-center align-items-center mt-10" >
+          <Spinner animation="border" variant="primary" />
+        </div>
+      )
+    }
 
   return (
     <div className='carousel-wrapper'>

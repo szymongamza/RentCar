@@ -40,7 +40,7 @@ function Availability() {
     };
 
     useEffect(() => {
-      const fetchTime = () => {
+      const fetchVehicles = () => {
         vehicleService.QueryVehicles(page,itemsPerPage,fromDateTime,toDateTime)
         .then((response: any) => {
           const data = response.data;
@@ -52,8 +52,8 @@ function Availability() {
           console.log(e);
         });
       };
-      fetchTime();
-    }, [page]);
+      fetchVehicles();
+    }, [page,fromDateTime,toDateTime]);
   
     if (vehicles.length ==0) {
       return (
@@ -85,6 +85,7 @@ function Availability() {
             <div className="card-body">
               <h5 className="card-title">{vehicle.vehicleModel.modelName}</h5>
               <p className="card-text">{vehicle.vehicleModel.manufacturer.manufacturerName}</p>
+              <p className="cart-text">Production year: {vehicle.year}</p>
               <p className="card-text">{vehicle.vehicleModel.numberOfSeats} seats</p>
               <p className="card-text">{vehicle.vehicleModel.rangeInKilometers}km of range</p>
               <p className="card-text">{vehicle.vehicleModel.cargoCapacityInLitres}L of cargo space</p>

@@ -2,35 +2,36 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 import './OfficesCarousel.css';
-
+import { OfficeResource } from '../interfaces';
+import Spinner from 'react-bootstrap/Spinner';
+import officeService from '../services/officeService';
 
 function OfficesCarousel() {
     const [offices, setOffices] = useState<OfficeResource[]>([]);
     const [error, setError] = useState({});
 
-    interface OfficeResource{
-      id: number,
-      officeName:	string,
-      phoneNumber: string,
-      address: string,
-      timeOpen:	string,
-      timeClose: string,
-      imagePath: string,
-      description:	string
-    }
-
-
-
     useEffect(() => {
-      const fetchOffices = async () => {
-        const response = await fetch(
-          `http://localhost:5245/api/Offices`
-        );
-        const data = await response.json();
-        setOffices(data);
+      const fetchOffices = () => {
+        officeService.GetAll()
+        .then((response: any) => {
+          const data = response.data;
+          setOffices(data);
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
       };
       fetchOffices();
     }, []);
+  
+    if (offices.length ==0) {
+      return (
+        <div className="d-flex justify-content-center align-items-center mt-10" >
+          <Spinner animation="border" variant="primary" />
+        </div>
+      )
+    }
 
 
   return (

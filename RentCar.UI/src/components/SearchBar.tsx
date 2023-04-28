@@ -42,6 +42,7 @@ function SearchBar(props: Props) {
       navigate(
         `/availability?fromDateTime=${fromDateTime}&toDateTime=${toDateTime}`
       );
+      navigate(0);
     } else {
       setShowModal(true);
     }
