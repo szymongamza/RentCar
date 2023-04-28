@@ -30,9 +30,12 @@ public class BookingService : IBookingService
     {
         try
         {
-            var existingVehicle = await _vehicleRepository.FindByIdAsync(booking.VehicleId);
+            var existingVehicle = await _vehicleRepository.FindByIdAsyncIncludeBookings(booking.VehicleId);
             if (existingVehicle == null)
                 return new BookingResponse("Invalid vehicle.");
+
+            if (existingVehicle.Bookings.Any(x => x.PickUpTime.AddHours(-2) <= booking.DropOffTime && x.DropOffTime.AddHours(2) >= booking.PickUpTime))
+                return new BookingResponse("DateTime span overlap on other booking");
 
             var existingPickUpOffice = await _officeRepository.FindByIdAsync(booking.PickUpOfficeId);
             if (existingPickUpOffice == null)

@@ -10,6 +10,12 @@ public class VehicleRepository : GenericRepository<Vehicle>, IVehicleRepository
     public VehicleRepository(RentCarDbContext dbContext) : base(dbContext)
     {
     }
+
+    public async Task<Vehicle> FindByIdAsyncIncludeBookings(int id)
+    {
+        return await _dbContext.Vehicles.Include(p => p.Bookings).AsSingleQuery().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+    }
+
     public async Task<QueryResult<Vehicle>> ToListAsync(VehicleQuery query)
     {
         IQueryable<Vehicle> queryable = _dbContext.Vehicles
