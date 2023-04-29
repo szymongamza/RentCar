@@ -52,6 +52,7 @@ const BookingModal = (props: BookingProps) => {
         (office) => office.id === selectedPickUpOfficeIdInt
       );
       setSelectedPickUpOffice(selectedPickUpOffice || null);
+      setShowError(false)
     }
   }
 
@@ -62,6 +63,7 @@ const BookingModal = (props: BookingProps) => {
         (office) => office.id === selectedDropOffOfficeIdInt
       );
       setSelectedDropOffOffice(selectedDropOffOffice || null);
+      setShowError(false)
     }
   }
 
@@ -74,7 +76,7 @@ const BookingModal = (props: BookingProps) => {
   ) => {
     setUserSurname(event.target.value);
   };
-
+  
   const handleEmailAddressChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -131,7 +133,7 @@ const BookingModal = (props: BookingProps) => {
           });
        };
       postBooking();
-    if(showError !== true){
+    if(showError){
       handleClose();
       handleShowResult();
     }
