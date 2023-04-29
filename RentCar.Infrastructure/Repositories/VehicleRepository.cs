@@ -11,9 +11,12 @@ public class VehicleRepository : GenericRepository<Vehicle>, IVehicleRepository
     {
     }
 
-    public async Task<Vehicle> FindByIdAsyncIncludeBookings(int id)
+    public async Task<Vehicle> FindByIdAsyncIncludeAll(int id)
     {
-        return await _dbContext.Vehicles.Include(p => p.Bookings).AsSingleQuery().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        return await _dbContext.Vehicles
+            .Include(p => p.Bookings).AsSingleQuery()
+            .Include(x=>x.VehicleModel.Manufacturer).AsSingleQuery()
+            .AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<QueryResult<Vehicle>> ToListAsync(VehicleQuery query)

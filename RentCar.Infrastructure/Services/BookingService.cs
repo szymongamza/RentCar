@@ -30,7 +30,7 @@ public class BookingService : IBookingService
     {
         try
         {
-            var existingVehicle = await _vehicleRepository.FindByIdAsyncIncludeBookings(booking.VehicleId);
+            var existingVehicle = await _vehicleRepository.FindByIdAsyncIncludeAll(booking.VehicleId);
             if (existingVehicle == null)
                 return new BookingResponse("Invalid vehicle.");
 
@@ -55,6 +55,7 @@ public class BookingService : IBookingService
 
             await _bookingRepository.AddAsync(booking);
 
+            booking.Vehicle = existingVehicle;
             return new BookingResponse(booking);
         }
         catch (Exception ex)

@@ -6,5 +6,5 @@ public interface IVehicleRepository : IGenericRepository<Vehicle>
 {
     Task<QueryResult<Vehicle>> ToListAsync(VehicleQuery query);
 
-    public Task<Vehicle> FindByIdAsyncIncludeBookings(int id);
+    public Task<Vehicle> FindByIdAsyncIncludeAll(int id);
 }
