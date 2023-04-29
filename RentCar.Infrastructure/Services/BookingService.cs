@@ -55,6 +55,8 @@ public class BookingService : IBookingService
 
             await _bookingRepository.AddAsync(booking);
 
+
+
             booking.Vehicle = existingVehicle;
             return new BookingResponse(booking);
         }
