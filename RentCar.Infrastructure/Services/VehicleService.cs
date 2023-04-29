@@ -124,6 +124,11 @@ public class VehicleService : IVehicleService
             key = string.Concat(key, "_", "vmid:" , query.VehicleModelId.Value);
         }
 
+        if (query.Status is not null)
+        {
+            key = string.Concat(key, "_", "status:", query.Status);
+        }
+
         key = string.Concat(key, "_", query.Page, "_", query.ItemsPerPage);
         return key;
     }

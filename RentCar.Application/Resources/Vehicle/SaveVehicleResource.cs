@@ -16,7 +16,7 @@ namespace RentCar.Application.Resources.Vehicle
         public string Description { get; set; }
         public string Year { get; set; }
         [Required]
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
         public int VehicleModelId { get; set; }
     }
 }

@@ -28,10 +28,8 @@ public static class DependencyInjection
         services.AddScoped<IOfficeService, OfficeService>();
         services.AddScoped<IBookingService, BookingService>();
         services.AddScoped<IDateTimeService, DateTimeService>();
+        services.AddScoped<IEmailService, EmailService>();
         services.AddMemoryCache();
-
-
-
 
         return services;
     }
