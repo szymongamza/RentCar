@@ -30,9 +30,12 @@ public class BookingService : IBookingService
     {
         try
         {
-            var existingVehicle = await _vehicleRepository.FindByIdAsync(booking.VehicleId);
+            var existingVehicle = await _vehicleRepository.FindByIdAsyncIncludeAll(booking.VehicleId);
             if (existingVehicle == null)
                 return new BookingResponse("Invalid vehicle.");
+
+            if (existingVehicle.Bookings.Any(x => x.PickUpTime.AddHours(-2) <= booking.DropOffTime && x.DropOffTime.AddHours(2) >= booking.PickUpTime))
+                return new BookingResponse("DateTime span overlap on other booking");
 
             var existingPickUpOffice = await _officeRepository.FindByIdAsync(booking.PickUpOfficeId);
             if (existingPickUpOffice == null)
@@ -52,6 +55,9 @@ public class BookingService : IBookingService
 
             await _bookingRepository.AddAsync(booking);
 
+
+
+            booking.Vehicle = existingVehicle;
             return new BookingResponse(booking);
         }
         catch (Exception ex)
@@ -130,7 +136,7 @@ public class BookingService : IBookingService
         }
     }
 
-    private double CalculateTotalCost(Booking booking, Vehicle vehicle)
+    private static double CalculateTotalCost(Booking booking, Vehicle vehicle)
     {
         var timeSpan = booking.DropOffTime - booking.PickUpTime;
         int days;

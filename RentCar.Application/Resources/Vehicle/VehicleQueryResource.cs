@@ -7,5 +7,6 @@ namespace RentCar.Application.Resources.Vehicle
         public int? VehicleModelId { get; set; }
         public DateTime? StartDateTime { get; set; }
         public DateTime? EndDateTime { get; set;}
+        public bool? Status { get; set; }
     }
 }

@@ -128,13 +128,13 @@ namespace RentCar.Infrastructure.Migrations
                     b.Property<string>("RegistrationNumber")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("VehicleModelId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Year")
+                    b.Property<string>("Year")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

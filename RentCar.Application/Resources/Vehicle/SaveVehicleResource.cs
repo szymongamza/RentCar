@@ -14,9 +14,9 @@ namespace RentCar.Application.Resources.Vehicle
         [Required]
         [MaxLength(500)]
         public string Description { get; set; }
-        public DateTime Year { get; set; }
+        public string Year { get; set; }
         [Required]
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
         public int VehicleModelId { get; set; }
     }
 }

@@ -5,4 +5,6 @@ namespace RentCar.Application.Interfaces.Repositories;
 public interface IVehicleRepository : IGenericRepository<Vehicle>
 {
     Task<QueryResult<Vehicle>> ToListAsync(VehicleQuery query);
+
+    public Task<Vehicle> FindByIdAsyncIncludeAll(int id);
 }

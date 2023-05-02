@@ -10,6 +10,15 @@ public class VehicleRepository : GenericRepository<Vehicle>, IVehicleRepository
     public VehicleRepository(RentCarDbContext dbContext) : base(dbContext)
     {
     }
+
+    public async Task<Vehicle> FindByIdAsyncIncludeAll(int id)
+    {
+        return await _dbContext.Vehicles
+            .Include(p => p.Bookings).AsSingleQuery()
+            .Include(x=>x.VehicleModel.Manufacturer).AsSingleQuery()
+            .AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+    }
+
     public async Task<QueryResult<Vehicle>> ToListAsync(VehicleQuery query)
     {
         IQueryable<Vehicle> queryable = _dbContext.Vehicles
@@ -28,6 +37,8 @@ public class VehicleRepository : GenericRepository<Vehicle>, IVehicleRepository
         if (query.StartDateTime is not null && query.EndDateTime is not null)
             queryable = queryable.Where(v => !v.Bookings.Any(b => b.PickUpTime.AddHours(-2) <= query.EndDateTime && b.DropOffTime.AddHours(2) >= query.StartDateTime));
 
+        if (query.Status is not null)
+            queryable = queryable.Where(p => p.Status == query.Status);
 
         // Here I count all items present in the database for the given query, to return as part of the pagination data.
         int totalItems = await queryable.CountAsync();

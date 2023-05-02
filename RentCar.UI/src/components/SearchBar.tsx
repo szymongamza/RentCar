@@ -1,50 +1,45 @@
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Modal from 'react-bootstrap/Modal';
-import { useNavigate } from 'react-router-dom';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import TimeService from "../services/timeService";
+import Spinner from "react-bootstrap/Spinner";
+import "./SearchBar.css";
+interface Props {
+  selectedStartDateTime: string;
+  selectedEndDateTime: string;
+}
 
-function SearchBar() {
-  const currentDate = new Date().toISOString().slice(0, 10);
+function SearchBar(props: Props) {
   const navigate = useNavigate();
 
-  const [fromDate, setFromDate] = useState('');
-  const [fromTime, setFromTime] = useState('');
-  const [toDate, setToDate] = useState('');
-  const [toTime, setToTime] = useState('');
+  const [fromDateTime, setFromDate] = useState(props.selectedStartDateTime);
+  const [toDateTime, setToDate] = useState(props.selectedEndDateTime);
   const [showModal, setShowModal] = useState(false);
-  
+  const [time, setTime] = useState("");
 
   const handleFromDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFromDate(event.target.value);
-  };
-
-  const handleFromTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFromTime(event.target.value);
   };
 
   const handleToDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setToDate(event.target.value);
   };
 
-  const handleToTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setToTime(event.target.value);
-  };
-
-  const isAfter = (fromDate: string, fromTime: string, toDate: string, toTime: string) => {
-    const fromDateTime = new Date(`${fromDate}T${fromTime}`);
-    const toDateTime = new Date(`${toDate}T${toTime}`);
-    return toDateTime > fromDateTime;
+  const isAfter = (fromDateTime: string, toDateTime: string) => {
+    const fromDateTimeObj = new Date(`${fromDateTime}`);
+    const toDateTimeObj = new Date(`${toDateTime}`);
+    return toDateTimeObj > fromDateTimeObj;
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (isAfter(fromDate, fromTime, toDate, toTime)) {
+    if (isAfter(fromDateTime, toDateTime)) {
       navigate(
-        `/availability?fromDate=${fromDate}&fromTime=${fromTime}&toDate=${toDate}&toTime=${toTime}`
+        `/availability?fromDateTime=${fromDateTime}&toDateTime=${toDateTime}`
       );
+      navigate(0);
     } else {
       setShowModal(true);
     }
@@ -54,76 +49,69 @@ function SearchBar() {
     setShowModal(false);
   };
 
+  useEffect(() => {
+    const fetchTime = () => {
+      TimeService.getTime()
+        .then((response: any) => {
+          setTime(response.data.slice(0, 16));
+          console.log(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    };
+    fetchTime();
+  }, []);
+
+  if (!time) {
+    return (
+      <div className="d-flex justify-content-center align-items-center mt-10">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
+
   return (
-    <div>
-    <Form onSubmit={handleSubmit} className="mx-auto w-50 mt-3 text-center">
-        <Row>
-            <Col>
-      <Form.Group controlId="fromDate">
-        <Form.Label>Pickup date:</Form.Label>
-        <Form.Control
-          type="date"
-          value={fromDate}
-          min={currentDate}
-          onChange={handleFromDateChange}
-        />
-      </Form.Group>
-      </Col>
-      <Col>
-      <Form.Group controlId="fromTime">
-      <Form.Label>Pickup time:</Form.Label>
-        <Form.Control
-          type="time"
-          value={fromTime}
-          onChange={handleFromTimeChange}
-        />
-      </Form.Group>
-      </Col>
-      </Row>
+    <div className="container text-center">
+      <Form onSubmit={handleSubmit} className="mx-auto w-50 mt-3 text-center">
+        <Form.Group controlId="fromDate">
+          <Form.Label>Pickup date:</Form.Label>
+          <Form.Control
+            type="datetime-local"
+            value={fromDateTime}
+            min={time}
+            onChange={handleFromDateChange}
+          />
+        </Form.Group>
 
-      <Row>
-            <Col>
-      <Form.Group controlId="toDate">
-        <Form.Label>Drop off date:</Form.Label>
-        <Form.Control
-          type="date"
-          value={toDate}
-          min={currentDate}
-          onChange={handleToDateChange}
-        />
-      </Form.Group>
-      </Col>
-      <Col>
-      <Form.Group controlId="toTime">
-      <Form.Label>Drop off time:</Form.Label>
-        <Form.Control
-          type="time"
-          value={toTime}
-          onChange={handleToTimeChange}
-        />
-      </Form.Group>
-      </Col>
-      </Row>
+        <Form.Group controlId="toDate">
+          <Form.Label>Drop off date:</Form.Label>
+          <Form.Control
+            type="datetime-local"
+            value={toDateTime}
+            min={time}
+            onChange={handleToDateChange}
+          />
+        </Form.Group>
 
-
-      <Button variant="primary" type="submit" size='lg' className="mt-3 mb-3">
-        Search
-      </Button>
-    </Form>
-    
-    <Modal show={showModal} onHide={handleCloseModal}>
-      <Modal.Header closeButton>
-        <Modal.Title>Error</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        The selected drop off time must be after the selected pickup time.
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseModal}>
-          Close
+        <Button variant="primary" type="submit" size="lg" className="mt-3">
+          Search
         </Button>
-      </Modal.Footer>
-    </Modal>
+      </Form>
+
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          The selected drop off time must be after the selected pickup time.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

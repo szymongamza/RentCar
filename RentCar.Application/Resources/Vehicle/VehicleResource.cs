@@ -9,8 +9,8 @@ namespace RentCar.Application.Resources.Vehicle
         public string ImagePath { get; set; }
         public double DailyPrice { get; set; }
         public string Description { get; set; }
-        public DateTime Year { get; set; }
-        public bool? Status { get; set; }
+        public string Year { get; set; }
+        public bool Status { get; set; }
         public VehicleModelResource VehicleModel { get; set; }
     }
 }
