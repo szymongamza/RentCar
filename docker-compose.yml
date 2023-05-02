@@ -1,0 +1,14 @@
+version: "3.4"
+services:
+  api:
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .
+      dockerfile: RentCar.API/Dockerfile
+  front:
+    image: ${DOCKER_REGISTRY-}front
+    build:
+      context: .
+      dockerfile: RentCar.UI/Dockerfile
+    environment:
+      - CHOKIDAR_USEPOLLING=true
