@@ -25,7 +25,7 @@ function OfficesCarousel() {
     fetchOffices();
   }, []);
 
-  if (offices.length == 0) {
+  if (offices.length === 0) {
     return (
       <div className="d-flex justify-content-center align-items-center mt-10">
         <Spinner animation="border" variant="primary" />
