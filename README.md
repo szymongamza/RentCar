@@ -1,11 +1,11 @@
 # RentCar.API
 Web app for renting Tesla cars in Mallorca. Few locations (Palma Airport, Palma City Center, Alcudia and Manacor) and people can rent and return the cars at any one of them. Possibility to rent all available passenger Tesla models.
 
-## Za≥oøenia / Decyzje:
-1. Dostarczenie MVP spe≥niajπcego wymogi zadania, pominiÍcie funkcjonalnoúci takich jak logowanie, rejestracja czy autoryzacja.
-2. Z racji bliskich odleg≥oúci biur, kaødy samochÛd moøe zostaÊ wynajÍty w kaødym biurze niezaleønie od poprzedniej rezerwacji samochodu. Narzucenie sta≥ego odstÍpu czasowego miÍdzy rezerwacjami (2h)
-3. Koszt liczony od kaødej rozpoczÍtej doby
-4. Tylko przyk≥adowe unit testy przy uøyciu xUnit i Moq
+## Za≈Ço≈ºenia / Decyzje:
+1. Dostarczenie MVP spe≈ÇniajƒÖcego wymogi zadania, pominiƒôcie funkcjonalno≈õci takich jak logowanie, rejestracja czy autoryzacja.
+2. Z racji bliskich odleg≈Ço≈õci biur, ka≈ºdy samoch√≥d mo≈ºe zostaƒá wynajƒôty w ka≈ºdym biurze niezale≈ºnie od poprzedniej rezerwacji samochodu. Narzucenie sta≈Çego odstƒôu czasowego miƒôdzy rezerwacjami (2h)
+3. Koszt liczony od ka≈ºdej rozpoczƒôtej doby
+4. Tylko przyk≈Çadowe unit testy przy u≈ºciu xUnit i Moq
 5. React'a z Typescript'em
 
 ## How to run:
@@ -17,8 +17,8 @@ Make sure, that u have Docker and Docker Compose: https://docs.docker.com/compos
 React app will run at: http://localhost:3000/  
 API Swagger will be at: http://localhost:5245/swagger/index.html
 ## Screenshots:
-![](./Screenshots/Home.png) 
-![](./Screenshots/OFfices.png) 
-![](./Screenshots/VehiclesSearch.png) 
-![](./Screenshots/Booking.png) 
+![](./Screenshots/Home.PNG) 
+![](./Screenshots/OFfices.PNG) 
+![](./Screenshots/VehiclesSearch.PNG) 
+![](./Screenshots/Booking.PNG) 
 
