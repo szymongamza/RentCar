@@ -8,8 +8,17 @@ Web app for renting Tesla cars in Mallorca. Few locations (Palma Airport, Palma 
 4. Tylko przyk³adowe unit testy przy u¿yciu xUnit i Moq
 5. React'a z Typescript'em
 
+## How to run:
+Make sure, that u have Docker and Docker Compose: https://docs.docker.com/compose/install/
+1. `git clone https://github.com/szymongamza/RentCar.git`  
+2. `cd RentCar`  
+3. `docker compose up`  
+
+React app will run at: http://localhost:3000/  
+API Swagger will be at: http://localhost:5245/swagger/index.html
 ## Screenshots:
 ![](./Screenshots/Home.png) 
 ![](./Screenshots/OFfices.png) 
 ![](./Screenshots/VehiclesSearch.png) 
 ![](./Screenshots/Booking.png) 
+
