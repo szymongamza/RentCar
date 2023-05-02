@@ -136,7 +136,7 @@ public class BookingService : IBookingService
         }
     }
 
-    private double CalculateTotalCost(Booking booking, Vehicle vehicle)
+    private static double CalculateTotalCost(Booking booking, Vehicle vehicle)
     {
         var timeSpan = booking.DropOffTime - booking.PickUpTime;
         int days;
